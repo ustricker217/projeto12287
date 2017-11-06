@@ -98,10 +98,12 @@
     @if(count($errors) > 0)
         @include('partials.errors')
     @endif--}}
+    @include('partials.statistics')
 
     @yield('token')
     @yield('content')
     @yield('pagescript')
+
 </div>
 
 <!-- jQuery -->

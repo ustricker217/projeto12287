@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('master');
-});
+});*/
+
+
+Route::get('/','UserController@index');

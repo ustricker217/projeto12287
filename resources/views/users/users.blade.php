@@ -3,7 +3,7 @@
 @section('title', 'Lista de Utilizadores')
 
 @section('content')
-    <table id=datatable class="table table-striped">
+    <table id="datatable" class="table table-striped">
         <thead>
         <tr>
             <th>Id</th>
@@ -24,7 +24,7 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="/js/users/users.js"></script>
+    <script src="/js/users.js"></script>
 
 @endsection
 
