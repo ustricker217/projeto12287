@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Http\Resources\User as UserResources;
 
-class GameController extends Controller
+
+class UserControllerAPI extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +17,7 @@ class GameController extends Controller
     public function index()
     {
         //
+        return UserResources::collection(User::paginate(5));
     }
 
     /**

@@ -88,7 +88,7 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    @if(session('success'))
+{{--    @if(session('success'))
         @include('partials.success-session')
     @endif
     @if(session('error'))
@@ -97,8 +97,11 @@
 
     @if(count($errors) > 0)
         @include('partials.errors')
-    @endif
+    @endif--}}
+
+    @yield('token')
     @yield('content')
+    @yield('pagescript')
 </div>
 
 <!-- jQuery -->
