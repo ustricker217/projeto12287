@@ -22,10 +22,34 @@
         var url = "/api/users";
         if ($datatable == null) {
             $datatable = $("#datatable").DataTable({
+                "serverSide": true,
+                "processing": true,
+                "paging": true,
+                "searching": false,
+                "ordering": false,
+                "lengthChange": false,
+                "pageLength": 5,
                 ajax: {
-                    "url": url,
+                    url: 'api/users',
+                    dataSrc: 'data',
+                    data: function ( d ) {
+                        if (d.length === 0) {
+                            return {};
+                        }
+                        var numPage = d.start / d.length + 1 ;
+                        if (numPage < 1) {
+                            numPage  = 1;
+                        }
+                        return {"page": numPage};
+                    },
+                    dataFilter: function(rawData){
+                        var data = jQuery.parseJSON(rawData);
+                        data.recordsTotal = data.meta.total;
+                        data.recordsFiltered = data.meta.total;
+                        return JSON.stringify(data);
+                    },
                 },
-                    "columns": [
+                    columns: [
                         {"data": "id"},
                         {"data": "name"},
                         {"data": "email"},

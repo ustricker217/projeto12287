@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('extrastyles')
+	<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+@endsection
+
 @section('title', 'Lista de Utilizadores')
 
 @section('content')
