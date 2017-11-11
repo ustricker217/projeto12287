@@ -72,7 +72,14 @@ class UserControllerAPI extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,'.$id,
+                'age' => 'integer|between:18,75'
+            ]);
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return new UserResource($user);
     }
 
     /**
@@ -83,6 +90,8 @@ class UserControllerAPI extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return response()->json(null, 204);
     }
 }

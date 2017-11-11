@@ -3,7 +3,7 @@
 
     var $datatable = null;
 
-/*    window.deleteUser = function (userId) {
+    window.deleteUser = function (userId) {
         event.preventDefault();
         if (confirm("Remove user " + userId + "?") === true)
         {
@@ -16,7 +16,8 @@
                 }
             });
         }
-    };*/
+    };
+
 
     var getUsers = function (source) {
         var url = "/api/users";
@@ -36,7 +37,7 @@
                         if (d.length === 0) {
                             return {};
                         }
-                        var numPage = d.start / d.length + 1 ;
+                        var numPage = d.start / d.length + 1;
                         if (numPage < 1) {
                             numPage  = 1;
                         }
@@ -57,8 +58,8 @@
                         {
                             "data": "id",
                             "render": function (data, type, row, meta) {
-                                return '<a class="btn btn-xs btn-primary"  href="/users/' + data + '">Edit</a>' +
-                                    '<a class="btn btn-xs btn-danger"  href="#" onclick=" deleteUser(' + data + ')">Delete</a>';
+                                return '<a class="btn btn-xs btn-primary"  href="/users/'+ data + '/edit">Edit</a>' +
+                                    '<a class="btn btn-xs btn-danger"  href="/users/ '+ data + '" onclick=" deleteUser(' + data + ')">Delete</a>';
                             }
                         }
 
@@ -69,6 +70,8 @@
             $datatable.ajax.url(url).load();
         }
     };
+
+
 
     getUsers();
 })();
