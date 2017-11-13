@@ -14,6 +14,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Nickname</th>
+            <th>Permission</th>
             <th>Actions</th>
         </tr>
         </thead>

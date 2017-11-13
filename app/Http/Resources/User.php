@@ -18,7 +18,8 @@ class User extends Resource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'nickname' => $this->nickname
+            'nickname' => $this->nickname,
+            'permission' => $this->blocked
         ];
     }
 }

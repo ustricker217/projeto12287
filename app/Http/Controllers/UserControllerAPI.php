@@ -94,4 +94,22 @@ class UserControllerAPI extends Controller
         $user->delete();
         return response()->json(null, 204);
     }
+
+    public function blockUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->blocked = 1;
+        $user->save();
+
+        return response()->json(null, 200);
+    }
+
+    public function unblockUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->blocked = 0;
+        $user->save();
+
+        return response()->json(null, 200);
+    }
 }
