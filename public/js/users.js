@@ -19,8 +19,9 @@
     window.blockUser = function (id) {
         event.preventDefault();
         if (confirm("Block user?") === true) {
+            var reason = prompt("Enter the reason:");
             $.ajax({
-                url: '/api/users/' + id +'/block',
+                url: '/api/users/' + id + '/block',
                 type: 'PUT',
                 success: function (result) {
                     $datatable.ajax.reload();
@@ -32,8 +33,9 @@
     window.unblockUser = function (id) {
         event.preventDefault();
         if (confirm("Unblock user?") === true) {
+            var reason = prompt("Enter the reason:");
             $.ajax({
-                url: '/api/users/' + id +'/unblock',
+                url: '/api/users/' + id + '/unblock',
                 type: 'PUT',
                 success: function (result) {
                     console.log($datatable);
@@ -44,10 +46,9 @@
     };
 
     var changePermission = function (permission, userId) {
-        if(permission === 0)
-        {
+        if (permission === 0) {
             return '<a class="btn btn-xs btn-info"  href="/users/' + userId + '" onclick=" blockUser(' + userId + ')">Block</a>';
-        }else{
+        } else {
             return '<a class="btn btn-xs btn-info"  href="/users/' + userId + '" onclick=" unblockUser(' + userId + ')">Unblock</a>';
         }
     };
@@ -93,7 +94,6 @@
                         "data": "permission",
                         "render": function (data, type, row, meta) {
                             return changePermission(data, row.id);
-
                         }
                     },
                     {

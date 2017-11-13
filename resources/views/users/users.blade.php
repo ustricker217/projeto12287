@@ -4,7 +4,7 @@
 	<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
 @endsection
 
-@section('title', 'Lista de Utilizadores')
+@section('title', 'Painel de Administrador')
 
 @section('content')
     <table id="datatable" class="table table-striped">
