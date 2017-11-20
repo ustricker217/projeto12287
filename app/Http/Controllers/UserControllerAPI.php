@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestChangePermission;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\User as UserResources;
@@ -33,7 +34,7 @@ class UserControllerAPI extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,7 +45,7 @@ class UserControllerAPI extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -55,7 +56,7 @@ class UserControllerAPI extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -66,17 +67,17 @@ class UserControllerAPI extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $request->validate([
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email,'.$id,
-                'age' => 'integer|between:18,75'
-            ]);
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'age' => 'integer|between:18,75'
+        ]);
         $user = User::findOrFail($id);
         $user->update($request->all());
         return new UserResource($user);
@@ -85,7 +86,7 @@ class UserControllerAPI extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -95,19 +96,23 @@ class UserControllerAPI extends Controller
         return response()->json(null, 204);
     }
 
-    public function blockUser($id)
+    public function blockUser(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $user->blocked = 1;
-        $user->save();
+        //dd($request->input("reason"));
+        $aux = $request->input("reason");
+        $status = $request->input("estado");
+        //dd($aux);
+        if ($status) {
+            $user->reason_blocked = null;
+            $user->reason_reactivated = $aux;
+            $user->blocked = 0;
 
-        return response()->json(null, 200);
-    }
-
-    public function unblockUser($id)
-    {
-        $user = User::findOrFail($id);
-        $user->blocked = 0;
+        } else {
+            $user->reason_reactivated = null;
+            $user->reason_blocked = $aux;
+            $user->blocked = 1;
+        }
         $user->save();
 
         return response()->json(null, 200);

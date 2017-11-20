@@ -16,41 +16,25 @@
         }
     };
 
-    window.blockUser = function (id) {
-        event.preventDefault();
-        if (confirm("Block user?") === true) {
-            var reason = prompt("Enter the reason:");
-            $.ajax({
-                url: '/api/users/' + id + '/block',
-                type: 'PUT',
-                success: function (result) {
-                    $datatable.ajax.reload();
-                }
-            });
-        }
-    };
-
-    window.unblockUser = function (id) {
+    window.changePermission = function (id, estado) {
         event.preventDefault();
         if (confirm("Unblock user?") === true) {
             var reason = prompt("Enter the reason:");
             $.ajax({
-                url: '/api/users/' + id + '/unblock',
+                url: '/api/users/' + id + '/block',
                 type: 'PUT',
+                data: JSON.stringify({'reason': reason, 'estado': estado}),
+                contentType: 'application/json; charset=utf-8',
                 success: function (result) {
-                    console.log($datatable);
                     $datatable.ajax.reload();
+                    console.log(this.data);
                 }
             });
         }
     };
 
-    var changePermission = function (permission, userId) {
-        if (permission === 0) {
-            return '<a class="btn btn-xs btn-info"  href="/users/' + userId + '" onclick=" blockUser(' + userId + ')">Block</a>';
-        } else {
-            return '<a class="btn btn-xs btn-info"  href="/users/' + userId + '" onclick=" unblockUser(' + userId + ')">Unblock</a>';
-        }
+    var changePermission = function (userId, estado) {
+        return '<a class="btn btn-xs btn-info"  href="/users/' + userId + '" onclick=" changePermission(' + userId + ', ' + estado + ')">' + (estado == 1 ? "Unblock" : "Block") + '</a>';
     };
 
 
@@ -93,7 +77,7 @@
                     {
                         "data": "permission",
                         "render": function (data, type, row, meta) {
-                            return changePermission(data, row.id);
+                            return changePermission(row.id, data);
                         }
                     },
                     {
