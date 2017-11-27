@@ -19,5 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('users', 'UserControllerAPI');
 Route::put('users/{id}/block', 'UserControllerAPI@blockUser');
+//Route::get('users/{id}', 'UserControllerAPI@show');
 //Route::put('users/{id}/unblock', 'UserControllerAPI@unblockUser');
 

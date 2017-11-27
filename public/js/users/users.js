@@ -16,16 +16,16 @@
         }
     };
 
-    window.changePermission = function (id, estado) {
+    window.blockUnblock = function (id, estado) {
         event.preventDefault();
-        if (confirm("Unblock user?") === true) {
+        if (confirm("Change user permission?") === true) {
             var reason = prompt("Enter the reason:");
             $.ajax({
                 url: '/api/users/' + id + '/block',
                 type: 'PUT',
                 data: JSON.stringify({'reason': reason, 'estado': estado}),
                 contentType: 'application/json; charset=utf-8',
-                success: function (result) {
+                success: function () {
                     $datatable.ajax.reload();
                     console.log(this.data);
                 }
@@ -33,8 +33,10 @@
         }
     };
 
+
     var changePermission = function (userId, estado) {
-        return '<a class="btn btn-xs btn-info"  href="/users/' + userId + '" onclick=" changePermission(' + userId + ', ' + estado + ')">' + (estado == 1 ? "Unblock" : "Block") + '</a>';
+        return '<a class="btn btn-xs btn-info"  href="/users/' + userId + '" onclick=" blockUnblock(' + userId + ', ' + estado + ')">' + (estado == 1 ? "Unblock" : "Block") + '</a>';
+
     };
 
 
@@ -71,19 +73,30 @@
                 },
                 columns: [
                     {"data": "id"},
-                    {"data": "name"},
+                    {
+                        "data": "name",
+                        render: function (data, type, row, meta) {
+                            return '<a href="/users/' + row.id + '">' + data + '</a>';
+                        }
+                    },
                     {"data": "email"},
                     {"data": "nickname"},
                     {
                         "data": "permission",
                         "render": function (data, type, row, meta) {
-                            return changePermission(row.id, data);
+                            if (!row.admin) {
+                                return changePermission(row.id, data);
+                            }
+                            return null;
                         }
                     },
                     {
                         "data": "id",
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-xs btn-danger"  href="/users/' + data + '" onclick=" deleteUser(' + row.id + ')">Delete</a>';
+                            if (!row.admin) {
+                                return '<a class="btn btn-xs btn-danger"  href="/users/' + data + '" onclick=" deleteUser(' + row.id + ')">Delete</a>';
+                            }
+                            return null;
                         }
                     }
 

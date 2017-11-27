@@ -48,10 +48,11 @@ class UserControllerAPI extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user)
     {
-        //
+        return new UserResources(User::find($user));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -99,10 +100,10 @@ class UserControllerAPI extends Controller
     public function blockUser(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        //dd($request->input("reason"));
+
         $aux = $request->input("reason");
         $status = $request->input("estado");
-        //dd($aux);
+
         if ($status) {
             $user->reason_blocked = null;
             $user->reason_reactivated = $aux;
