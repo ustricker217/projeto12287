@@ -12,11 +12,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-          @yield ('extrastyles')
+    @yield ('extrastyles')
 
 
     <title>Jogo da Memória</title>
@@ -46,16 +46,19 @@
 </head>
 
 <body>
-<nav >
+<nav>
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse" align="center">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="#"> Dashboard</a>
+                    <a href="{{route('user.index')}}"> Dashboard</a>
                 </li>
                 @if (Auth::guest())
                     <li><a href="#">Login</a></li>
                     <li><a href="#">Register</a></li>
+
+                    <li><a href="{{route('admin.changePasswd')}}">Alterar Password Admin</a></li>
+                    <li><a href="#">Alterar Password Config</a></li>
                 @else
                     @can('update', Auth::user())
                         <li><a href="#">Editar Perfil</a></li>
@@ -91,16 +94,16 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-{{--    @if(session('success'))
-        @include('partials.success-session')
-    @endif
-    @if(session('error'))
-        @include('partials.error-session')
-    @endif
+    {{--    @if(session('success'))
+            @include('partials.success-session')
+        @endif
+        @if(session('error'))
+            @include('partials.error-session')
+        @endif
 
-    @if(count($errors) > 0)
-        @include('partials.errors')
-    @endif--}}
+        @if(count($errors) > 0)
+            @include('partials.errors')
+        @endif--}}
     @include('partials.statistics')
 
     @yield('token')

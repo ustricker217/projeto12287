@@ -30,7 +30,7 @@
 
 
     <div>
-        <a class="btn btn-xs btn-success" href="/">Back</a>
+        <a class="btn btn-xs btn-success" href="/admin">Back</a>
     </div>
 @endsection
 

@@ -16,5 +16,6 @@
 });*/
 
 
-Route::get('/','UserController@index');
+Route::get('/admin','UserController@index')->name('user.index');
 Route::get('/users/{id}', 'UserController@show');
+Route::get('/changeAdminPasswd', 'UserController@showChangePasswd')->name('admin.changePasswd');

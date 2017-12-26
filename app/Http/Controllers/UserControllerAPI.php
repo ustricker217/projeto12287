@@ -118,4 +118,20 @@ class UserControllerAPI extends Controller
 
         return response()->json(null, 200);
     }
+
+    public function updateAdminPassword(Request $request)
+    {
+        $user = User::findOrFail()->where('admin', '=', '1');
+        $newPassword = bcrypt($request->input('newPassword'));
+
+        $currentPassword = bcrypt($user->password);
+
+        if ($newPassword == $currentPassword) {
+            return response()->json("Password equal to previous password", 400);
+        } else {
+            $user->password = $newPassword;
+            $user->save();
+            return response()->json(null, 200);
+        }
+    }
 }
