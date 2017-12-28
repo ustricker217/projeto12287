@@ -23,3 +23,7 @@ Route::put('changeAdminPasswd', 'UserControllerAPI@updateAdminPassword');
 //CREATE A ADMIN CONTROLLER
 //Route::put('users/{id}/unblock', 'UserControllerAPI@unblockUser');
 
+//Passport routes
+Route::post('login', 'LoginControllerAPI@login');
+Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
+
