@@ -17,13 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('users', 'UserControllerAPI');
-Route::put('users/{id}/block', 'UserControllerAPI@blockUser');
-Route::put('changeAdminPasswd', 'UserControllerAPI@updateAdminPassword');
-//CREATE A ADMIN CONTROLLER
-//Route::put('users/{id}/unblock', 'UserControllerAPI@unblockUser');
 
-//Passport routes
+//ADMIN API ROUTES
+Route::apiResource('users', 'UserControllerAPI');
+Route::apiResource('images', 'ImageControllerAPI');
+
+Route::put('users/{id}/changePermission', 'UserControllerAPI@blockUser');
+
+Route::put('changeAdminPasswd', 'UserControllerAPI@updateAdminPassword');
+Route::put('changeConfigMail', 'UserControllerAPI@updateConfigMail');
+
+//PASSPORT API ROUTES
 Route::post('login', 'LoginControllerAPI@login');
 Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
 

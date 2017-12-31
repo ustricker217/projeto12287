@@ -6,6 +6,7 @@ use App\Http\Requests\RequestChangePermission;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\User as UserResources;
+use Illuminate\Support\Facades\DB;
 
 
 class UserControllerAPI extends Controller
@@ -121,7 +122,7 @@ class UserControllerAPI extends Controller
 
     public function updateAdminPassword(Request $request)
     {
-        $user = User::findOrFail()->where('admin', '=', '1');
+        $user = User::where('nickname', '=', 'admin')->first();
         $newPassword = bcrypt($request->input('newPassword'));
 
         $currentPassword = bcrypt($user->password);
@@ -131,7 +132,16 @@ class UserControllerAPI extends Controller
         } else {
             $user->password = $newPassword;
             $user->save();
-            return response()->json(null, 200);
+            return response()->json("message returned", 200);
         }
+    }
+
+    public function updateConfigMail(Request $request)
+    {
+        $newMail = $request->input('newMail');
+
+        DB::table('config')->where('id', '=', 1)->update(['platform_email' => $newMail]);
+
+        return response()->json(null, 200);
     }
 }

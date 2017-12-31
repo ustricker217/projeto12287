@@ -11,11 +11,12 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('master');
-});*/
 
 
+
+
+//ADMIN WEB ROUTES (VIEW)
 Route::get('/admin','UserController@index')->name('user.index');
 Route::get('/users/{id}', 'UserController@show');
 Route::get('/changeAdminPasswd', 'UserController@showChangePasswd')->name('admin.changePasswd');
+Route::get('/changeConfigMail', 'UserController@showChangeConfigMail')->name('admin.updateConfigMail');

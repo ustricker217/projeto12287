@@ -55,26 +55,11 @@
                 </li>
                 @if (Auth::guest())
                     <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
 
                     <li><a href="{{route('admin.changePasswd')}}">Alterar Password Admin</a></li>
-                    <li><a href="#">Alterar Password Config</a></li>
+                    <li><a href="{{route('admin.updateConfigMail')}}">Alterar Mail Config</a></li>
+                    <li><a href="#">Repositório Peças</a></li>
                 @else
-                    @can('update', Auth::user())
-                        <li><a href="#">Editar Perfil</a></li>
-                    @endcan
-                    @if(Auth::user()->isAdmin())
-                        <li class="active">
-                            <a href="#demo" data-toggle="collapse">Gestão Administrativa
-                                <span class="fa arrow">
-                        </span>
-                            </a>
-                            <div id="demo" class="collapse">
-                                <ul class="nav nav-second-level collapse in" aria-expanded="true">
-                                </ul>
-                            </div>
-                        </li>
-                    @endif
                 @endif
                 @if(Auth::user())
                     @include('partials.logout')

@@ -41,8 +41,8 @@
             type: 'PUT',
             data: JSON.stringify({'newPassword': passOne}),
             contentType: 'application/json; charset=utf-8',
-            success: function () {
-                console.log("Password changed");
+            success: function (response) {
+                console.log(response);
             }
         });
     };

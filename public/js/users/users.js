@@ -21,7 +21,7 @@
         if (confirm("Change user permission?") === true) {
             var reason = prompt("Enter the reason:");
             $.ajax({
-                url: '/api/users/' + id + '/block',
+                url: '/api/users/' + id + '/changePermission',
                 type: 'PUT',
                 data: JSON.stringify({'reason': reason, 'estado': estado}),
                 contentType: 'application/json; charset=utf-8',
