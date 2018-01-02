@@ -23,6 +23,7 @@ Route::apiResource('users', 'UserControllerAPI');
 Route::apiResource('images', 'ImageControllerAPI');
 
 Route::put('users/{id}/changePermission', 'UserControllerAPI@blockUser');
+Route::put('images/{id}/changeStatus', 'ImageControllerAPI@changeStatus');
 
 Route::put('changeAdminPasswd', 'UserControllerAPI@updateAdminPassword');
 Route::put('changeConfigMail', 'UserControllerAPI@updateConfigMail');

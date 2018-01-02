@@ -58,7 +58,7 @@
 
                     <li><a href="{{route('admin.changePasswd')}}">Alterar Password Admin</a></li>
                     <li><a href="{{route('admin.updateConfigMail')}}">Alterar Mail Config</a></li>
-                    <li><a href="#">Repositório Peças</a></li>
+                    <li><a href="{{route('image.index')}}">Repositório Peças</a></li>
                 @else
                 @endif
                 @if(Auth::user())

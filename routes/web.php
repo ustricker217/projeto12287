@@ -18,5 +18,6 @@
 //ADMIN WEB ROUTES (VIEW)
 Route::get('/admin','UserController@index')->name('user.index');
 Route::get('/users/{id}', 'UserController@show');
+Route::get('/images', 'ImageController@index')->name('image.index');
 Route::get('/changeAdminPasswd', 'UserController@showChangePasswd')->name('admin.changePasswd');
 Route::get('/changeConfigMail', 'UserController@showChangeConfigMail')->name('admin.updateConfigMail');
