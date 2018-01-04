@@ -1,10 +1,11 @@
-@extends('master')
+@extends('master-vue')
 
 @section('title', 'Memory Game')
 
 @section('content')
     <router-link to="/singlememory">SinglePlayer Memory Game</router-link> -
     <router-link to="/multimemory">Multiplayer Memory Game</router-link>
+    <router-link to="/login">Login</router-link>
 
     <router-view></router-view>
 @endsection
