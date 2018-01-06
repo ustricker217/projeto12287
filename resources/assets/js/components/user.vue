@@ -4,7 +4,7 @@
             <h1>{{ title }}</h1>
         </div>
         <div>
-            <user-login></user-login>
+            <user-login @user-logged="getLoggedUser"></user-login>
         </div>
         <div class="alert alert-success" v-if="showSuccess">
 
@@ -19,38 +19,46 @@
     import UserEdit from './userEdit.vue';
 
     export default {
-        data: function(){
+        data: function () {
             return {
                 title: 'User',
                 showSuccess: false,
                 successMessage: '',
                 currentUser: null,
+                username: '',
+                password: '',
+                ifLogged: false,
             }
         },
         methods: {
-            editUser: function(user){
+            editUser: function (user) {
                 this.currentUser = user;
                 this.showSuccess = false;
             },
-            deleteUser: function(user){
-                axios.delete('api/users/'+user.id)
+            deleteUser: function (user) {
+                axios.delete('api/users/' + user.id)
                     .then(response => {
                         this.showSuccess = true;
                         this.successMessage = 'User Deleted';
                         this.getUsers();
                     });
             },
-            savedUser: function(){
+            savedUser: function () {
                 this.currentUser = null;
                 this.$refs.usersListRef.editingUser = null;
                 this.showSuccess = true;
                 this.successMessage = 'User Saved';
             },
-            cancelEdit: function(){
+            cancelEdit: function () {
                 this.currentUser = null;
                 this.$refs.usersListRef.editingUser = null;
                 this.showSuccess = false;
             },
+
+            getLoggedUser: function (flag) {
+                this.ifLogged = flag;
+
+            }
         },
         components: {
             'user-login': UserLogin,

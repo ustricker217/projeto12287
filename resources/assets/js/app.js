@@ -11,19 +11,16 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
-import VueSocketio from 'vue-socket.io';
 
 Vue.use(VueRouter);
 
-//Vue.use(VueSocketio, 'http://192.168.10.10:8080');
-Vue.use(VueSocketio, 'http://192.168.10.1:8080');
-
 const singleplayerGame = Vue.component('singlegame', require('./components/singleplayer_memory.vue'));
 const multiplayerGame = Vue.component('multiplayergame', require('./components/multiplayer_memory.vue'));
-const userLogin = Vue.component('login', require('.components/userLogin.vue'));
+const userLogin = Vue.component('login', require('./components/userLogin.vue'));
+const user = Vue.component('user', require('./components/user.vue'));
 
 const routes = [
-
+    { path: '/', component: user },
     { path: '/singlememory', component: singleplayerGame },
     { path: '/multimemory', component: multiplayerGame },
     { path: '/login', component: userLogin },
