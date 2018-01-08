@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,7 @@
 
 
 var bind = __webpack_require__(6);
-var isBuffer = __webpack_require__(21);
+var isBuffer = __webpack_require__(22);
 
 /*global toString:true*/
 
@@ -475,7 +475,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(45)
+var listToStyles = __webpack_require__(46)
 
 /*
 type StyleObject = {
@@ -820,7 +820,7 @@ module.exports = g;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(23);
+var normalizeHeaderName = __webpack_require__(24);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -1128,12 +1128,12 @@ process.umask = function() { return 0; };
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(24);
-var buildURL = __webpack_require__(26);
-var parseHeaders = __webpack_require__(27);
-var isURLSameOrigin = __webpack_require__(28);
+var settle = __webpack_require__(25);
+var buildURL = __webpack_require__(27);
+var parseHeaders = __webpack_require__(28);
+var isURLSameOrigin = __webpack_require__(29);
 var createError = __webpack_require__(9);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(29);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(30);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -1230,7 +1230,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(30);
+      var cookies = __webpack_require__(31);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -1314,7 +1314,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(25);
+var enhanceError = __webpack_require__(26);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -1374,17 +1374,68 @@ module.exports = Cancel;
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(13);
-module.exports = __webpack_require__(68);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(64)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(66)
+/* template */
+var __vue_template__ = __webpack_require__(67)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/userLogin.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2808eb57", Component.options)
+  } else {
+    hotAPI.reload("data-v-2808eb57", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
 
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(14);
+module.exports = __webpack_require__(78);
+
+
+/***/ }),
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(42);
 /*jshint esversion: 6 */
 
 /**
@@ -1393,18 +1444,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(14);
+__webpack_require__(15);
 
-window.Vue = __webpack_require__(38);
+window.Vue = __webpack_require__(39);
 
 
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 
-var singleplayerGame = Vue.component('singlegame', __webpack_require__(42));
-var multiplayerGame = Vue.component('multiplayergame', __webpack_require__(48));
-var userLogin = Vue.component('login', __webpack_require__(63));
-var user = Vue.component('user', __webpack_require__(77));
+var singleplayerGame = Vue.component('singlegame', __webpack_require__(43));
+var multiplayerGame = Vue.component('multiplayergame', __webpack_require__(49));
+var userLogin = Vue.component('login', __webpack_require__(12));
+var user = Vue.component('user', __webpack_require__(68));
 
 var routes = [{ path: '/', component: user }, { path: '/singlememory', component: singleplayerGame }, { path: '/multimemory', component: multiplayerGame }, { path: '/login', component: userLogin }];
 
@@ -1423,11 +1474,11 @@ var app = new Vue({
 }).$mount('#app');
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(15);
+window._ = __webpack_require__(16);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -1436,9 +1487,9 @@ window._ = __webpack_require__(15);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(17);
+  window.$ = window.jQuery = __webpack_require__(18);
 
-  __webpack_require__(18);
+  __webpack_require__(19);
 } catch (e) {}
 
 /**
@@ -1447,7 +1498,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(19);
+window.axios = __webpack_require__(20);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -1481,7 +1532,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -18570,10 +18621,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(17)(module)))
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -18601,7 +18652,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -28861,7 +28912,7 @@ return jQuery;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 /*!
@@ -31244,13 +31295,13 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(20);
+module.exports = __webpack_require__(21);
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31258,7 +31309,7 @@ module.exports = __webpack_require__(20);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(6);
-var Axios = __webpack_require__(22);
+var Axios = __webpack_require__(23);
 var defaults = __webpack_require__(5);
 
 /**
@@ -31293,14 +31344,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(11);
-axios.CancelToken = __webpack_require__(36);
+axios.CancelToken = __webpack_require__(37);
 axios.isCancel = __webpack_require__(10);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(37);
+axios.spread = __webpack_require__(38);
 
 module.exports = axios;
 
@@ -31309,7 +31360,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 /*!
@@ -31336,7 +31387,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31344,8 +31395,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(5);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(31);
-var dispatchRequest = __webpack_require__(32);
+var InterceptorManager = __webpack_require__(32);
+var dispatchRequest = __webpack_require__(33);
 
 /**
  * Create a new instance of Axios
@@ -31422,7 +31473,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31441,7 +31492,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31474,7 +31525,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31502,7 +31553,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31577,7 +31628,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31637,7 +31688,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31712,7 +31763,7 @@ module.exports = (
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31755,7 +31806,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31815,7 +31866,7 @@ module.exports = (
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31874,18 +31925,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(33);
+var transformData = __webpack_require__(34);
 var isCancel = __webpack_require__(10);
 var defaults = __webpack_require__(5);
-var isAbsoluteURL = __webpack_require__(34);
-var combineURLs = __webpack_require__(35);
+var isAbsoluteURL = __webpack_require__(35);
+var combineURLs = __webpack_require__(36);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -31967,7 +32018,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31994,7 +32045,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32015,7 +32066,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32036,7 +32087,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32100,7 +32151,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32134,7 +32185,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42948,10 +42999,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(39).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(40).setImmediate))
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -43004,13 +43055,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(40);
+__webpack_require__(41);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -43203,7 +43254,7 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(7)))
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45833,19 +45884,19 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(43)
+  __webpack_require__(44)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(46)
+var __vue_script__ = __webpack_require__(47)
 /* template */
-var __vue_template__ = __webpack_require__(47)
+var __vue_template__ = __webpack_require__(48)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45884,13 +45935,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(44);
+var content = __webpack_require__(45);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -45910,7 +45961,7 @@ if(false) {
 }
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -45918,13 +45969,13 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.board {\n    max-width: 368px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.board div {\n    display: inline-block;\n    border-style: solid;\n    border-width: 2px 2px 2px 2px;\n    border-color: black;\n    margin-left: -2px;\n    margin-top: -2px;\n}\n.board img {\n    width: 80px;\n    height: 80px;\n    margin: 5px;\n    padding: 0;\n    border-style: none;\n}\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /**
@@ -45957,11 +46008,18 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+//
+//
+//
 //
 //
 //
@@ -45995,104 +46053,210 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             showFailure: false,
             successMessage: '',
             failMessage: '',
-            currentValue: 1,
             gameEnded: false,
-            player1User: undefined,
-            player2User: undefined,
-            board: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            currentValue: 0,
+            boardGame: new Board(1),
+            flippedTiles: [],
+            playerMoves: 0,
+            start: false,
+            hidebtn: true,
+            timer: null
         };
     },
     methods: {
-        pieceImageURL: function pieceImageURL(piece) {
-            var imgSrc = String(piece);
-            return 'img/' + imgSrc + '.png';
+        pieceImageURL: function pieceImageURL(key) {
+            {
+                //console.log("draw tile");
+                return this.boardGame.board[key].pathToImage();
+            }
         },
-        clickPiece: function clickPiece(index) {
-            if (this.board[index] || this.gameEnded) return;
-            this.board[index] = this.currentValue;
-            this.successMessage = this.currentPlayer + ' has Played';
-            this.showSuccess = true;
-            this.currentValue = this.currentValue == 1 ? 2 : 1;
-            this.checkGameEnded();
+        clickPiece: function clickPiece(piece) {
+            var _this = this;
+
+            if (!piece.hidden || this.gameEnded) {
+                return;
+            }
+
+            piece.flip();
+
+            this.flippedTiles.push(piece);
+
+            this.playerMoves++;
+
+            if (this.playerMoves == 2) {
+                //AQUI
+                this.timer = setTimeout(function () {
+                    _this.clearTimer();
+                    _this.checkTilesEqual();
+
+                    _this.playerMoves = 0;
+                    _this.flippedTiles = [];
+                }, 500);
+
+                if (this.isBoardComplete()) {
+                    this.gameEnded = true;
+                    this.showSuccess = true;
+
+                    this.successMessage = "You won!";
+                }
+            } else {
+                // DO NOTHING
+            }
         },
+
+        // ----------------------------------------------------------------------------------------
+        // GAME LOGIC - START
+        // ----------------------------------------------------------------------------------------
+        startGame: function startGame() {
+            this.start = true;
+            this.hidebtn = false;
+        },
+
+        checkTilesEqual: function checkTilesEqual() {
+            if (this.flippedTiles[0].tileValue == this.flippedTiles[1].tileValue) {
+                //this.successMessage = "You got a pair!";
+                //this.showSuccess = true;
+
+                this.playerMoves = 0;
+                this.flippedTiles = [];
+            } else {
+                this.flippedTiles[0].flip();
+                this.flippedTiles[1].flip();
+
+                //this.successMessage = "Not a pair";
+                //this.showSuccess = true;
+
+                this.playerMoves = 0;
+                this.flippedTiles = [];
+            }
+        },
+
         restartGame: function restartGame() {
             console.log('restartGame');
-            this.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
             this.showSuccess = false;
             this.showFailure = false;
             this.successMessage = '';
             this.failMessage = '';
-            this.currentValue = 1;
             this.gameEnded = false;
+            this.currentValue = 0;
+            this.boardGame = new Board(1);
+            this.flippedTiles = [];
+            this.playerMoves = 0;
         },
-        // ----------------------------------------------------------------------------------------
-        // GAME LOGIC - START
-        // ----------------------------------------------------------------------------------------
-        hasRow: function hasRow(value) {
-            return this.board[0] == value && this.board[1] == value && this.board[2] == value || this.board[3] == value && this.board[4] == value && this.board[5] == value || this.board[6] == value && this.board[7] == value && this.board[8] == value || this.board[0] == value && this.board[3] == value && this.board[6] == value || this.board[1] == value && this.board[4] == value && this.board[7] == value || this.board[2] == value && this.board[5] == value && this.board[8] == value || this.board[0] == value && this.board[4] == value && this.board[8] == value || this.board[2] == value && this.board[4] == value && this.board[6] == value;
-        },
-        checkGameEnded: function checkGameEnded() {
-            if (this.hasRow(1)) {
-                this.successMessage = this.playerName(1) + ' won the Game';
-                this.showSuccess = true;
-                this.gameEnded = true;
-            }
-            if (this.hasRow(2)) {
-                this.successMessage = this.playerName(2) + ' won the Game';
-                this.showSuccess = true;
-                this.gameEnded = true;
-            }
-            if (this.isBoardComplete()) {
-                this.successMessage = 'The Game ended in a Tie';
-                this.showSuccess = true;
-                this.gameEnded = true;
-            }
-            return false;
-        },
+
+        checkGameEnded: function checkGameEnded() {},
         isBoardComplete: function isBoardComplete() {
-            var returnValue = true;
-            this.board.forEach(function (element) {
-                if (element === 0) {
-                    returnValue = false;
+            var flag = true;
+
+            this.boardGame.board.forEach(function (tile) {
+                if (tile.hidden) {
+                    flag = false;
                     return;
                 }
             });
-            return returnValue;
+            return flag;
         },
+
+        clearTimer: function clearTimer() {
+            clearTimeout(this.timer);
+            this.timer = null;
+        },
+
         // ----------------------------------------------------------------------------------------
         // GAME LOGIC - END
-        // ----------------------------------------------------------------------------------------        
-        playerName: function playerName(playerNumber) {
-            console.log(playerNumber);
-            console.log(this.player1User);
-            if (this.player1User != undefined && playerNumber == 1) {
-                return this.player1User.name;
-            }
-            if (this.player2User != undefined && playerNumber == 2) {
-                return this.player2User.name;
-            }
-            return 'Player ' + playerNumber;
-        }
+        // ----------------------------------------------------------------------------------------
+        playerName: function playerName(playerNumber) {}
     },
-    computed: {
-        currentPlayer: function currentPlayer() {
-            console.log(this.currentValue);
-            console.log(this.playerName(this.currentValue));
-            return this.playerName(this.currentValue);
-        }
-    },
-    mounted: function mounted() {
-        if (this.$root.$data.player1) {
-            this.player1User = this.$root.$data.player1;
-        }
-        if (this.$root.$data.player2) {
-            this.player2User = this.$root.$data.player2;
-        }
-    }
+    computed: {},
+    mounted: function mounted() {}
 });
 
+/////CLASS BOARD
+
+var Board = function () {
+    function Board(player, x, y) {
+        _classCallCheck(this, Board);
+
+        console.log("constructor");
+        this.board = [];
+        this.player = player;
+
+        this.board = this.newBoard(4, 4);
+        console.log(this.board);
+    }
+
+    _createClass(Board, [{
+        key: 'newBoard',
+        value: function newBoard(x, y) {
+            console.log("new board");
+            var length = x * y;
+            var board = new Array(length);
+
+            var tileValue = 0;
+            var counter = 0;
+
+            for (var i = 0; i < length; i++) {
+                board[i] = new Tile(tileValue);
+                counter++;
+
+                if (counter == 2) {
+                    counter = 0;
+                    tileValue++;
+                }
+            }
+
+            for (var _i = 0; _i < 500; _i++) {
+                var posOne = Math.floor(Math.random() * length);
+                var posTwo = Math.floor(Math.random() * length);
+
+                var aux = board[posOne];
+                board[posOne] = board[posTwo];
+                board[posTwo] = aux;
+            }
+            //console.log(board);
+            return board;
+        }
+    }]);
+
+    return Board;
+}();
+
+/////CLASS TILE
+
+
+var Tile = function () {
+    function Tile(tileValue) {
+        _classCallCheck(this, Tile);
+
+        this.hidden = true;
+        this.open = false;
+        this.tileValue = tileValue;
+        this.imgHidden = 'img/hidden.png';
+        this.imgTile = 'img/' + String(this.tileValue) + '.png';
+    }
+
+    _createClass(Tile, [{
+        key: 'pathToImage',
+        value: function pathToImage() {
+            if (this.hidden) {
+                return this.imgHidden;
+            } else {
+                return this.imgTile;
+            }
+        }
+    }, {
+        key: 'flip',
+        value: function flip() {
+            this.hidden = !this.hidden;
+            this.open = true;
+        }
+    }]);
+
+    return Tile;
+}();
+
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46101,13 +46265,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", [
-      _c("h3", { staticClass: "text-center" }, [_vm._v(_vm._s(_vm.title))]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("h2", [_vm._v("Current Player : " + _vm._s(_vm.currentPlayer))]),
-      _vm._v(" "),
-      _c("br")
+      _c("h3", { staticClass: "text-center" }, [_vm._v(_vm._s(_vm.title))])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "game-zone-content" }, [
@@ -46153,22 +46311,48 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "board" },
-        _vm._l(_vm.board, function(piece, key) {
-          return _c("div", [
-            _c("img", {
-              attrs: { src: _vm.pieceImageURL(piece) },
-              on: {
-                click: function($event) {
-                  _vm.clickPiece(key)
-                }
-              }
+      _vm.hidebtn
+        ? _c(
+            "div",
+            [
+              _c("center", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-xs",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.startGame($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Press Start!\n                ")]
+                )
+              ])
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.start
+        ? _c(
+            "div",
+            { staticClass: "board" },
+            _vm._l(_vm.boardGame.board, function(piece, key) {
+              return _c("div", [
+                _c("img", {
+                  attrs: { src: _vm.pieceImageURL(key) },
+                  on: {
+                    click: function($event) {
+                      _vm.clickPiece(piece)
+                    }
+                  }
+                })
+              ])
             })
-          ])
-        })
-      ),
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("hr")
     ])
@@ -46185,19 +46369,19 @@ if (false) {
 }
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(49)
+  __webpack_require__(50)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(51)
+var __vue_script__ = __webpack_require__(52)
 /* template */
-var __vue_template__ = __webpack_require__(62)
+var __vue_template__ = __webpack_require__(63)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46236,13 +46420,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
+var content = __webpack_require__(51);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -46262,7 +46446,7 @@ if(false) {
 }
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -46276,14 +46460,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lobby_vue__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lobby_vue__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lobby_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__lobby_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_memory_vue__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_memory_vue__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_memory_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__game_memory_vue__);
 //
 //
@@ -46449,19 +46633,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(53)
+  __webpack_require__(54)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(55)
+var __vue_script__ = __webpack_require__(56)
 /* template */
-var __vue_template__ = __webpack_require__(56)
+var __vue_template__ = __webpack_require__(57)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46500,13 +46684,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(54);
+var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -46526,7 +46710,7 @@ if(false) {
 }
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -46540,7 +46724,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports) {
 
 //
@@ -46576,7 +46760,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46640,19 +46824,19 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(58)
+  __webpack_require__(59)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(60)
+var __vue_script__ = __webpack_require__(61)
 /* template */
-var __vue_template__ = __webpack_require__(61)
+var __vue_template__ = __webpack_require__(62)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46691,13 +46875,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(59);
+var content = __webpack_require__(60);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -46717,7 +46901,7 @@ if(false) {
 }
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -46731,7 +46915,7 @@ exports.push([module.i, "\n.gameseparator[data-v-84b0b616]{\r\n    border-style:
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46843,7 +47027,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46918,7 +47102,7 @@ if (false) {
 }
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47040,57 +47224,6 @@ if (false) {
 }
 
 /***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(64)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(66)
-/* template */
-var __vue_template__ = __webpack_require__(67)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/userLogin.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2808eb57", Component.options)
-  } else {
-    hotAPI.reload("data-v-2808eb57", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47168,15 +47301,15 @@ module.exports = {
             var _this = this;
 
             axios.post('api/login', {
-                //JSON.stringify({'email': this.username, 'password': this.password})
                 'password': this.password,
                 'email': this.username,
                 contentType: 'application/json'
             }).then(function (response) {
                 _this.showSuccess = true;
                 _this.successMessage = response.data.msg;
-                _this.$emit('user-logged', true);
+                _this.$emit('user-logged', false);
                 //this.$route.router.go('/multimemory');
+                _this.$router.push('/');
             }).catch(function (error) {
                 _this.showSuccess = true;
                 _this.successMessage = error.data.msg;
@@ -47299,32 +47432,18 @@ if (false) {
 
 /***/ }),
 /* 68 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(78)
+  __webpack_require__(69)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(80)
+var __vue_script__ = __webpack_require__(71)
 /* template */
-var __vue_template__ = __webpack_require__(86)
+var __vue_template__ = __webpack_require__(77)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47363,13 +47482,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 78 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(79);
+var content = __webpack_require__(70);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -47389,7 +47508,7 @@ if(false) {
 }
 
 /***/ }),
-/* 79 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -47403,15 +47522,29 @@ exports.push([module.i, "\np[data-v-548b6a3c] {\n    font-size: 2em;\n    text-a
 
 
 /***/ }),
-/* 80 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userLogin_vue__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userLogin_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userLogin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__userLogin_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__userEdit_vue__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__userEdit_vue__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__userEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__userEdit_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47435,13 +47568,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            title: 'User',
+            title: 'Jogo da Memoria',
             showSuccess: false,
             successMessage: '',
             currentUser: null,
             username: '',
             password: '',
-            ifLogged: false
+            ifLogged: true
         };
     },
     methods: {
@@ -47482,19 +47615,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 81 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(82)
+  __webpack_require__(73)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(84)
+var __vue_script__ = __webpack_require__(75)
 /* template */
-var __vue_template__ = __webpack_require__(85)
+var __vue_template__ = __webpack_require__(76)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47533,13 +47666,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 82 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(83);
+var content = __webpack_require__(74);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -47559,7 +47692,7 @@ if(false) {
 }
 
 /***/ }),
-/* 83 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -47573,7 +47706,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 84 */
+/* 75 */
 /***/ (function(module, exports) {
 
 //
@@ -47642,7 +47775,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 85 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47829,7 +47962,7 @@ if (false) {
 }
 
 /***/ }),
-/* 86 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47843,7 +47976,38 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      [_c("user-login", { on: { "user-logged": _vm.getLoggedUser } })],
+      [
+        _vm.ifLogged
+          ? _c(
+              "div",
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: { to: "/login" },
+                    on: { "user-logged": _vm.getLoggedUser }
+                  },
+                  [_vm._v("Login")]
+                )
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.ifLogged != true
+          ? _c("div", [_c("p", [_vm._v("logout")])])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("router-link", { attrs: { to: "/singlememory" } }, [
+          _vm._v("SinglePlayer Memory Game    ")
+        ]),
+        _vm._v(" "),
+        _c("router-link", { attrs: { to: "/multimemory" } }, [
+          _vm._v("Multiplayer Memory Game")
+        ]),
+        _vm._v(" "),
+        _c("router-view")
+      ],
       1
     ),
     _vm._v(" "),
@@ -47877,6 +48041,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-548b6a3c", module.exports)
   }
 }
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

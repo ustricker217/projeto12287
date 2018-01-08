@@ -32,3 +32,5 @@ Route::put('changeConfigMail', 'UserControllerAPI@updateConfigMail');
 Route::post('login', 'LoginControllerAPI@login');
 Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
 
+//GAME ROUTES
+Route::get('newSinglePlayer', 'GameControllerAPI@createSinglePlayerGame');

@@ -37,8 +37,9 @@
                     .then(response => {
                         this.showSuccess = true;
                         this.successMessage = response.data.msg;
-                        this.$emit('user-logged', true);
+                        this.$emit('user-logged', false);
                         //this.$route.router.go('/multimemory');
+                        this.$router.push('/');
                     })
                     .catch(error => {
                         this.showSuccess = true;

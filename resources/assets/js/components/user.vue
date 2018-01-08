@@ -4,8 +4,22 @@
             <h1>{{ title }}</h1>
         </div>
         <div>
-            <user-login @user-logged="getLoggedUser"></user-login>
+            <div v-if="ifLogged">
+                <router-link to="/login" @user-logged="getLoggedUser">Login</router-link>
+            </div>
+            <div v-if="ifLogged != true">
+                <p>logout</p>
+            </div>
+
+            <router-link to="/singlememory">SinglePlayer Memory Game&nbsp;&nbsp;&nbsp;&nbsp;</router-link>
+            <router-link to="/multimemory">Multiplayer Memory Game</router-link>
+
+            <router-view></router-view>
+
         </div>
+        <!--<div v-if="currentUser != null">-->
+            <!--<user-login @user-logged="getLoggedUser"></user-login>-->
+        <!--</div>-->
         <div class="alert alert-success" v-if="showSuccess">
 
             <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
@@ -21,13 +35,13 @@
     export default {
         data: function () {
             return {
-                title: 'User',
+                title: 'Jogo da Memoria',
                 showSuccess: false,
                 successMessage: '',
                 currentUser: null,
                 username: '',
                 password: '',
-                ifLogged: false,
+                ifLogged: true,
             }
         },
         methods: {
