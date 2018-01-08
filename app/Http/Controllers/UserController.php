@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Game;
 
 class UserController extends Controller
 {
@@ -13,7 +14,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.users');
+        $singleplayerGames = Game::where([['status', '=', 'terminated'],['type','=','singleplayer']])->count();
+        $multiplayerGames = Game::where([['status', '=', 'terminated'],['type','=','multiplayer']])->count();
+        $total = Game::where([['status', '=', 'terminated']])->count();
+        return view('users.users', compact('singleplayerGames', 'multiplayerGames', 'total' ));
     }
 
     /**

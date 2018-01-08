@@ -144,4 +144,29 @@ class UserControllerAPI extends Controller
 
         return response()->json(null, 200);
     }
+
+    public function getStatistics($id)
+    {
+        $vitorias = 0;
+        $derrotas = 0;
+        $total = 0;
+        $winnerID = null;
+        //$userGames = GameUser::where('user_id', '=', $id);
+        $userGames = DB::table('game_user')->select('game_id')->where('user_id', '=', $id)->get();
+
+        //return response()->json(array('jogo' => $userGames));
+
+        foreach ($userGames as $game_id) {
+            $winnerID = DB::table('games')->where('id', '=', $game_id)->get();
+            //return response()->json(array('jogo' => $winnerID));
+            /*if($id == $winnerID) {
+                $vitorias++;
+            } else {
+                $derrotas++;
+            }
+            $total++;*/
+        }
+        return response()-json(array('winner'=>$winnerID));
+        //return response()->json(array('vitorias' => $vitorias, 'derrotas' => $derrotas, 'total' => $total,  ), 200);
+    }
 }

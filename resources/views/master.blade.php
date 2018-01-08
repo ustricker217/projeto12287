@@ -79,7 +79,6 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    @include('partials.statistics')
 
     @yield('token')
     @yield('content')

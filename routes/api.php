@@ -34,3 +34,6 @@ Route::middleware('auth:api')->post('logout', 'LoginControllerAPI@logout');
 
 //GAME ROUTES
 Route::get('newSinglePlayer', 'GameControllerAPI@createSinglePlayerGame');
+
+//USER ROUTES
+Route::get('userStatistics/{id}', 'UserControllerAPI@getStatistics');
