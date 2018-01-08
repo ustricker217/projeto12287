@@ -20,12 +20,14 @@ const singleplayerGame = Vue.component('singlegame', require('./components/singl
 const multiplayerGame = Vue.component('multiplayergame', require('./components/multiplayer_memory.vue'));
 const userLogin = Vue.component('login', require('./components/userLogin.vue'));
 const user = Vue.component('user', require('./components/user.vue'));
+const userRegister = Vue.component('register', require('./components/userRegister.vue'));
 
 const routes = [
     { path: '/', component: user },
     { path: '/singlememory', component: singleplayerGame },
     { path: '/multimemory', component: multiplayerGame },
     { path: '/login', component: userLogin },
+    { path: '/register', component: userRegister},
 ];
 
 const router = new VueRouter({
