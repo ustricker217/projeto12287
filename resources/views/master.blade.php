@@ -79,16 +79,6 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    {{--    @if(session('success'))
-            @include('partials.success-session')
-        @endif
-        @if(session('error'))
-            @include('partials.error-session')
-        @endif
-
-        @if(count($errors) > 0)
-            @include('partials.errors')
-        @endif--}}
     @include('partials.statistics')
 
     @yield('token')

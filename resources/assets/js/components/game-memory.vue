@@ -1,41 +1,39 @@
 <template>
-	<div class="gameseparator">
+    <div class="gameseparator">
         <div>
             <h2 class="text-center">Game {{ game.gameID }}</h2>
             <br>
         </div>
-        <div class="game-zone-content">       
+        <div class="game-zone-content">
             <div class="alert" :class="alerttype">
                 <strong>{{ message }} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="game.gameEnded" v-on:click.prevent="closeGame">Close Game</a></strong>
             </div>
             <div class="board">
-                <div v-for="(piece, index) of game.board" >
-                    <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(index)">
+                <div v-for="(piece, index) of game.boardGame.board">
+                    <img v-bind:src="pieceImageURL(index)" v-on:click="clickPiece(piece)">
                 </div>
             </div>
             <hr>
-        </div>  
-    </div>			
+        </div>
+    </div>
 </template>
 
 <script type="text/javascript">
-	export default {
+    export default {
         props: ['game'],
-        data: function(){
-			return {
-
-            }
+        data: function () {
+            return {}
         },
         computed: {
-            ownPlayerNumber(){
+            ownPlayerNumber() {
                 if (this.game.player1SocketID == this.$parent.socketId) {
                     return 1;
                 } else if (this.game.player2SocketID == this.$parent.socketId) {
                     return 2;
-                } 
+                }
                 return 0;
             },
-            ownPlayerName(){
+            ownPlayerName() {
                 var ownNumber = this.ownPlayerNumber;
                 if (ownNumber == 1)
                     return this.game.player1;
@@ -43,7 +41,7 @@
                     return this.game.player2;
                 return "Unknown";
             },
-            adversaryPlayerName(){
+            adversaryPlayerName() {
                 var ownNumber = this.ownPlayerNumber;
                 if (ownNumber == 1)
                     return this.game.player2;
@@ -51,7 +49,7 @@
                     return this.game.player1;
                 return "Unknown";
             },
-            message(){
+            message() {
                 if (!this.game.gameStarted) {
                     return "Game has not started yet";
                 } else if (this.game.gameEnded) {
@@ -59,7 +57,7 @@
                         return "Game has ended. You Win.";
                     } else if (this.game.winner == 0) {
                         return "Game has ended. There was a tie.";
-                    } 
+                    }
                     return "Game has ended and " + this.adversaryPlayerName + " has won. You lost.";
                 } else {
                     if (this.game.playerTurn == this.ownPlayerNumber) {
@@ -70,7 +68,7 @@
                 }
                 return "Game is inconsistent";
             },
-            alerttype(){
+            alerttype() {
                 if (!this.game.gameStarted) {
                     return "alert-warning";
                 } else if (this.game.gameEnded) {
@@ -78,44 +76,76 @@
                         return "alert-success";
                     } else if (this.game.winner == 0) {
                         return "alert-info";
-                    } 
+                    }
                     return "alert-danger";
-                } 
+                }
                 if (this.game.playerTurn == this.ownPlayerNumber) {
-                    return "alert-success";    
+                    return "alert-success";
                 } else {
                     return "alert-info";
                 }
-                
+
             }
         },
         methods: {
-            pieceImageURL (pieceNumber) {
-                var imgSrc = String(pieceNumber);
-                return 'img/' + imgSrc + '.png';
+            pieceImageURL(pieceNumber) {
+                //console.log(this.game);
+                return this.pathToImage(pieceNumber);
             },
-            closeGame (){
+            closeGame() {
                 this.$parent.close(this.game);
             },
-            clickPiece(index){
+            clickPiece(index) {
                 if (!this.game.gameEnded) {
                     if (this.game.playerTurn != this.ownPlayerNumber) {
                         alert("It's not your turn to play");
                     } else {
-                        if (this.game.board[index] == 0) {
-                            this.$parent.play(this.game, index);
-                        }
+                        this.$parent.play(this.game, index);
+                        this.pathToImage(index);
                     }
                 }
-            }
+            },
+            pathToImage(index) {
+                if (this.game.boardGame.board[index].hidden) {
+                    return this.game.boardGame.board[index].imgHidden;
+                }
+                else {
+                    return this.game.boardGame.board[index].imgTile;
+                }
+            },
         }
     }
 </script>
 
-<style scoped>	
-.gameseparator{
-    border-style: solid;
-    border-width: 2px 0 0 0;
-    border-color: black;
-}
+<style scoped>
+    .gameseparator {
+        border-style: solid;
+        border-width: 2px 0 0 0;
+        border-color: black;
+    }
+
+    .board {
+        max-width: 368px;
+        margin: 0 auto;
+        border-style: solid;
+        border-width: 0px 0 0 0px;
+        border-color: black;
+    }
+
+    .board div {
+        display: inline-block;
+        border-style: solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: black;
+        margin-left: -2px;
+        margin-top: -2px;
+    }
+
+    .board img {
+        width: 80px;
+        height: 80px;
+        margin: 5px;
+        padding: 0;
+        border-style: none;
+    }
 </style>

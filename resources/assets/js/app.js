@@ -11,7 +11,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
+import VueSocketio from 'vue-socket.io';
 
+Vue.use(VueSocketio, 'http://192.168.10.10:8080');
 Vue.use(VueRouter);
 
 const singleplayerGame = Vue.component('singlegame', require('./components/singleplayer_memory.vue'));

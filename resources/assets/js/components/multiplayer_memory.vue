@@ -21,7 +21,7 @@
 
 <script type="text/javascript">
     import Lobby from './lobby.vue';
-    import GameTicTocToe from './game-memory.vue';
+    import MemoryGame from './game-memory.vue';
 
 	export default {
         data: function(){
@@ -49,10 +49,12 @@
                 this.loadActiveGames();
             },
             my_active_games(games){
+                console.log(games);
                 this.activeGames = games;
             },
             my_lobby_games(games){
                 this.lobbyGames = games;
+               // console.log(games);
             },
             invalid_play(errorObject){
                 if (errorObject.type == 'Invalid_Game') {
@@ -113,7 +115,7 @@
         },
         components: {
             'lobby': Lobby,
-            'game': GameTicTocToe,
+            'game': MemoryGame,
         },
         mounted() {
             this.loadLobby();

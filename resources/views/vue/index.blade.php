@@ -3,6 +3,7 @@
 @section('title', 'Memory Game')
 
 @section('content')
+    <router-link to="/multimemory">Multiplayer Memory Game</router-link>
     <router-view></router-view>
 @endsection
 
