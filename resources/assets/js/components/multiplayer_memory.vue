@@ -70,6 +70,7 @@
             },
             game_changed(game){
                 for (var lobbyGame of this.lobbyGames) {
+                    console.log(game);
                     if (game.gameID == lobbyGame.gameID) {
                         Object.assign(lobbyGame, game);
                         break;

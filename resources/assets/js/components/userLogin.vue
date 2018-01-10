@@ -35,10 +35,10 @@
                     contentType: 'application/json',
                 })
                     .then(response => {
+                        //console.log(response);
                         this.showSuccess = true;
-                        this.successMessage = response.data.msg;
-                        this.$emit('user-logged', false);
-                        //this.$route.router.go('/multimemory');
+                        this.successMessage = "User succesfully logged";
+                        this.$emit('user-logged', [this.username, response.data.access_token]);
                         this.$router.push('/');
                     })
                     .catch(error => {

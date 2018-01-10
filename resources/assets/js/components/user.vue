@@ -4,22 +4,23 @@
             <h1>{{ title }}</h1>
         </div>
         <div>
-            <div v-if="ifLogged">
-                <router-link to="/login" @user-logged="getLoggedUser">Login</router-link>
-            </div>
-            <div v-if="ifLogged != true">
-                <p>logout</p>
+            <div v-if="ifLogged == true">
+                <button type="btn btn-default" class="btn-primary" v-on:click="goToEdit()">Edit User</button>
+                <button type="btn btn-default" class="btn-primary" v-on:click="goToSinglePlayer()">Singleplayer</button>
+                <button type="btn btn-default" class="btn-primary" v-on:click="goToMultiplayer()">Multiplayer</button>
+                <button type="btn btn-default" class="btn-primary" v-on:click="logout()">Logout</button>
             </div>
 
-            <router-link to="/singlememory">SinglePlayer Memory Game&nbsp;&nbsp;&nbsp;&nbsp;</router-link>
+            <div v-if="ifLogged == false">
+                <user-login @user-logged="getLoggedUser"></user-login>
+            </div>
 
+            <div v-if="ifEditing && ifLogged">
+                <user-edit :currentUser="currentUser" @user-canceled="cancelEdit" @user-saved="savedUser"></user-edit>
+            </div>
 
             <router-view></router-view>
-
         </div>
-        <!--<div v-if="currentUser != null">-->
-            <!--<user-login @user-logged="getLoggedUser"></user-login>-->
-        <!--</div>-->
         <div class="alert alert-success" v-if="showSuccess">
 
             <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
@@ -39,9 +40,10 @@
                 showSuccess: false,
                 successMessage: '',
                 currentUser: null,
-                username: '',
-                password: '',
-                ifLogged: true,
+                username: null,
+                userToken: null,
+                ifLogged: false,
+                ifEditing: false,
             }
         },
         methods: {
@@ -49,37 +51,73 @@
                 this.currentUser = user;
                 this.showSuccess = false;
             },
-            deleteUser: function (user) {
-                axios.delete('api/users/' + user.id)
-                    .then(response => {
-                        this.showSuccess = true;
-                        this.successMessage = 'User Deleted';
-                        this.getUsers();
-                    });
-            },
             savedUser: function () {
                 this.currentUser = null;
                 this.$refs.usersListRef.editingUser = null;
                 this.showSuccess = true;
                 this.successMessage = 'User Saved';
+                this.ifEditing = false;
             },
             cancelEdit: function () {
-                this.currentUser = null;
-                this.$refs.usersListRef.editingUser = null;
-                this.showSuccess = false;
+                //this.$refs.usersListRef.editingUser = null;
+                //this.showSuccess = false;
+                this.ifEditing = false;
             },
 
-            getLoggedUser: function (flag) {
-                this.ifLogged = flag;
+            getLoggedUser: function (array) {
+                console.log(array);
+                this.ifLogged = true;
+                this.username = array[0];
+                this.userToken = array[1];
+                sessionStorage.setItem('token-user', array[1]);
+                sessionStorage.setItem('username', array[0]);
 
-            }
+                axios.get('api/getLoggedUser/' + this.username)
+                    .then(response => {
+                        //console.log(response.data.data);
+                        this.currentUser = response.data.data;
+                        console.log(this.currentUser);
+                    })
+                    .catch(errors => {
+
+                    })
+            },
+
+            logout: function () {
+
+            },
+
+            goToSinglePlayer: function () {
+                this.$router.push('/singleplayer');
+            },
+
+            goToMultiplayer: function () {
+                this.$router.push('/multiplayer');
+            },
+
+            getAuthUser: function () {
+                this.username = sessionStorage.getItem('username');
+                this.userToken = sessionStorage.getItem('token-user');
+
+                if (this.username == null && this.userToken == null) {
+                    this.ifLogged = false;
+                } else {
+                    this.ifLogged = true;
+                }
+            },
+
+            goToEdit: function () {
+                this.ifEditing = true;
+                //this.$router.push('/edit');
+            },
+
         },
         components: {
             'user-login': UserLogin,
             'user-edit': UserEdit
         },
         mounted() {
-
+            this.getAuthUser();
         }
 
     }

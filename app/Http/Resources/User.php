@@ -23,6 +23,7 @@ class User extends Resource
             'blocked_reason' => $this->blocked_reason,
             'unblocked_reason' => $this->unblocked_reason,
             'admin' => $this->admin,
+            'password' => $this->password,
         ];
     }
 }

@@ -14,6 +14,7 @@ class MemoryGame {
         this.boardGame = new Board(2);
         this.flippedTiles = [];
         this.playerMoves = 0;
+        this.timer = null;
     }
 
     join(player2Name) {
@@ -22,6 +23,7 @@ class MemoryGame {
     }
 
     checkTilesEqual() {
+        console.log(this.flippedTiles);
         if (this.flippedTiles[0].tileValue == this.flippedTiles[1].tileValue) {
             //this.successMessage = "You got a pair!";
             //this.showSuccess = true;
@@ -85,7 +87,9 @@ class MemoryGame {
         */
         this.flip(index);
 
-        this.playerMoves ++;
+        this.playerMoves++;
+
+        this.flippedTiles.push(this.boardGame.board[index]);
 
         if (this.playerMoves == 2) {
             this.checkTilesEqual();
@@ -102,5 +106,7 @@ class MemoryGame {
         this.boardGame.board[index].hidden = !this.boardGame.board[index].hidden;
         this.boardGame.board[index].open = true;
     }
+
 }
+
 module.exports = MemoryGame;

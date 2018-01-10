@@ -53,17 +53,11 @@
                 <li>
                     <a href="{{route('user.index')}}"> Dashboard</a>
                 </li>
-                @if (Auth::guest())
                     <li><a href="#">Login</a></li>
 
                     <li><a href="{{route('admin.changePasswd')}}">Alterar Password Admin</a></li>
                     <li><a href="{{route('admin.updateConfigMail')}}">Alterar Mail Config</a></li>
                     <li><a href="{{route('image.index')}}">Repositório Peças</a></li>
-                @else
-                @endif
-                @if(Auth::user())
-                    @include('partials.logout')
-                @endif
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

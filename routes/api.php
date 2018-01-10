@@ -40,3 +40,5 @@ Route::get('newSinglePlayer', 'GameControllerAPI@createSinglePlayerGame');
 Route::get('userStatistics/{id}', 'UserControllerAPI@getStatistics');
 
 Route::post('register', 'UserControllerAPI@create');
+
+Route::get('getLoggedUser/{email}', 'UserControllerAPI@getLoggedUser');

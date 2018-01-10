@@ -43,6 +43,7 @@ class Board {
         //console.log(board);
         return board;
     }
+
 }
 
 module.exports = Board;

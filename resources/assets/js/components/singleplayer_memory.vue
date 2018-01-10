@@ -193,8 +193,7 @@
             for (let i = 0; i < 500; i++) {
                 let posOne = Math.floor(Math.random() * length);
                 let posTwo = Math.floor(Math.random() * length);
-
-                let aux = board[posOne];
+                let aux = board[posOne] ;
                 board[posOne] = board[posTwo];
                 board[posTwo] = aux;
 

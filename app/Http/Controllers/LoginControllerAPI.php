@@ -26,9 +26,9 @@ class LoginControllerAPI extends Controller
         ]);
         $errorCode = $response->getStatusCode();
         if ($errorCode == '200') {
-            //return json_decode((string)$response->getBody(), true);
-            return response()->json(
-                ['msg' => 'User successfully logged'], $errorCode);
+            return json_decode((string)$response->getBody(), true);
+            //return response()->json(
+               // ['msg' => 'User successfully logged'], $errorCode);
         } else {
             return response()->json(
                 ['msg' => 'User credentials are invalid'], $errorCode);

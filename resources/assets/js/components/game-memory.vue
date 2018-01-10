@@ -10,7 +10,7 @@
             </div>
             <div class="board">
                 <div v-for="(piece, index) of game.boardGame.board">
-                    <img v-bind:src="pieceImageURL(index)" v-on:click="clickPiece(piece)">
+                    <img v-bind:src="pieceImageURL(index)" v-on:click="clickPiece(index)">
                 </div>
             </div>
             <hr>
@@ -89,6 +89,7 @@
         },
         methods: {
             pieceImageURL(pieceNumber) {
+                //console.log(pieceNumber);
                 //console.log(this.game);
                 return this.pathToImage(pieceNumber);
             },
@@ -96,6 +97,7 @@
                 this.$parent.close(this.game);
             },
             clickPiece(index) {
+                this.pieceImageURL(index);
                 if (!this.game.gameEnded) {
                     if (this.game.playerTurn != this.ownPlayerNumber) {
                         alert("It's not your turn to play");
@@ -106,6 +108,7 @@
                 }
             },
             pathToImage(index) {
+                //console.log(this.game.boardGame);
                 if (this.game.boardGame.board[index].hidden) {
                     return this.game.boardGame.board[index].imgHidden;
                 }

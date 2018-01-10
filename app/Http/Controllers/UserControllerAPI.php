@@ -169,4 +169,10 @@ class UserControllerAPI extends Controller
         return response()-json(array('winner'=>$winnerID));
         //return response()->json(array('vitorias' => $vitorias, 'derrotas' => $derrotas, 'total' => $total,  ), 200);
     }
+
+    public function getLoggedUser($email)
+    {
+        $user = User::where('email', '=', $email)->first();
+        return new UserResources($user);
+    }
 }
