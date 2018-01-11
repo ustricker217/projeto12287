@@ -23,3 +23,8 @@ Route::get('/changeAdminPasswd', 'UserController@showChangePasswd')->name('admin
 Route::get('/changeConfigMail', 'UserController@showChangeConfigMail')->name('admin.updateConfigMail');
 
 Route::get('/','VueController@index');
+
+Route::get('register/verify/{email}', [
+    'as' => 'confirmation_path',
+    'uses' => 'UserControllerAPI@confirm'
+]);

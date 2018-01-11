@@ -5,37 +5,36 @@
         <div class="form-group">
             <label for="inputName">Name</label>
             <input
-                    type="text" class="form-control" v-model="name"
+                    type="text" class="form-control" v-model="username"
                     name="name" id="inputName"
-                    placeholder="Fullname"/>
+                    placeholder="Fullname" required/>
         </div>
         <div class="form-group">
             <label for="inputEmail">Email</label>
             <input
-                    type="email" class="form-control" v-model="email"
+                    type="email" class="form-control" v-model="mail"
                     name="email" id="inputEmail"
-                    placeholder="Email address"/>
+                    placeholder="Email address" required/>
         </div>
         <div class="form-group">
             <label for="inputNickname">Nickname</label>
             <input
                     type="text" class="form-control" v-model="nickname"
                     name="nickname" id="inputNickname"
-                    placeholder="Your Nickname"/>
+                    placeholder="Your Nickname" required/>
         </div>
         <div class="form-group">
             <label for="inputPassword">Password</label>
-            <input
-                    type="password" class="form-control" v-model="password"
-                    name="age" id="inputPassword"
-                    placeholder="Password"/>
+            <input type="password" class="form-control" v-model="password"
+                   name="password" id="inputPassword"
+                   placeholder="Password" required/>
         </div>
         <div class="form-group">
             <label for="inputConfirmPassword">Confirm Password</label>
             <input
                     type="password" class="form-control" v-model="confirm_password"
-                    name="age" id="inputConfirmPassword"
-                    placeholder="Confirm Password"/>
+                    name="confirm_password" id="inputConfirmPassword"
+                    placeholder="Confirm Password" required/>
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" v-on:click.prevent="registerUser()">Register
@@ -49,42 +48,54 @@
 </template>
 
 <script type="text/javascript">
-    module.exports={
+    module.exports = {
         //props: ['users'],
-        data: function(){
+        data: function () {
             return {
-                username: '',
-                nickname: '',
-                mail: '',
-                password: '',
-                confirm_password: '',
+                username: null,
+                nickname: null,
+                mail: null,
+                password: null,
+                confirm_password: null,
                 showSuccess: false,
                 successMessage: '',
             }
         },
         methods: {
             registerUser: function () {
-                axios.post('api/register', {
-                    'name': this.name,
-                    'nicknname': this.nickname,
-                    'email': this.username,
-                    'password': this.password,
-                    'confirm_password': this.confirm_password,
+                if (this.username == null || this.nickname == null || this.mail == null) {
+                    this.showSuccess = true;
+                    this.successMessage = "All feilds are required";
+                } else if (this.password != this.confirm_password) {
 
-                    contentType: 'application/json',
-                })
-                    .then(response => {
-                        this.showSuccess = true;
-                        this.successMessage = response.data.msg;
-                        this.$emit('user-logged', false);
-                        //this.$route.router.go('/multimemory');
-                        this.$router.push('/');
+                    this.showSuccess = true;
+                    this.successMessage = "Password and Confirm Password are different";
+
+                } else {
+                    axios.post('api/register', {
+                        'name': this.username,
+                        'nickname': this.nickname,
+                        'email': this.mail,
+                        'password': this.password,
+                        //'confirm_password': this.confirm_password,
+
+                        contentType: 'application/json',
                     })
-                    .catch(error => {
-                        this.showSuccess = true;
-                        this.successMessage = error.data.msg;
-                        console.log(this.password);
-                    });
+                        .then(response => {
+                            this.showSuccess = true;
+                            this.successMessage = response.data.msg;
+                            //this.$emit('user-logged', false);
+                            //this.$route.router.go('/multimemory');
+                            this.$router.push('/');
+                        })
+                        .catch(error => {
+                            //error.data.msg = "All fields are required";
+                            //this.showSuccess = true;
+                            //this.successMessage = error.data.msg;
+                            console.log(this.password);
+                        });
+                }
+
             },
         }
     }

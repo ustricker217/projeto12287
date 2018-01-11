@@ -45,7 +45,7 @@
             saveUser: function () {
                 axios.put('api/users/' + this.currentUser.id, this.currentUser)
                     .then(response => {
-                        Object.assign(this.currentUser, response.data.data);
+                        //Object.assign(this.currentUser, response.data.data);
                         this.$emit('user-saved', this.currentUser)
                     });
             },

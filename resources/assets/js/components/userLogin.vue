@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper form-signin">
+        <button type="btn btn-default" class="btn-primary" v-on:click="goToRegister()">Register</button>
         <h2 class="form-signin-heading">Please login</h2>
         <input type="text" class="form-control" name="mail" placeholder="Email Address" required="" autofocus=""
                v-model="username"/>
@@ -46,6 +47,10 @@
                         this.successMessage = error.data.msg;
                         console.log(this.password);
                     });
+            },
+
+            goToRegister: function () {
+                this.$router.push('/register');
             },
         }
     }

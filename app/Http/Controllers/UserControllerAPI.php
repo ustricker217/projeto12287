@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\User as UserResources;
 use Illuminate\Support\Facades\DB;
+use Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Input;
 
 
 class UserControllerAPI extends Controller
@@ -29,7 +32,52 @@ class UserControllerAPI extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'nickname' => 'required',
+            'password' => 'required',
+        ]);
 
+        $except = ['password', 'nickname'];
+        $user = new User();
+        $user->fill($request->except($except));
+        $user->nickname = $request->nickname;
+        $user->blocked = 1;
+        $user->reason_blocked = "Email not confirmed";
+        $user->reason_reactivated = null;
+        $user->admin = 0;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        /*
+        Mail::send('email.verify', ['email' => Hash::make($user->email), 'user' => $user], function ($message) {
+            $message->to(Input::get('email'), Input::get('name'))
+                ->subject('Verify your email address');
+        });
+        */
+        Mail::send('email.verify', ['email' => $user->email, 'user' => $user], function ($message) {
+            $message->to(Input::get('email'), Input::get('name'))
+                ->subject('Verify your email address');
+        });
+        return response()->json(new UserResources($user), 201);
+
+    }
+
+    public function confirm($email)
+    {
+
+        $users = User::all();
+
+        foreach ($users as $user) {
+            if ($user->email == $email) {
+                $user->blocked = 0;
+                $user->reason_blocked = null;
+                $user->reason_reactivated = "Email confirmed";
+                $user->save();
+            }
+        }
+        return new UserResources($user);
     }
 
     /**
@@ -75,14 +123,19 @@ class UserControllerAPI extends Controller
      */
     public function update(Request $request, $id)
     {
+        $except = ['password'];
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'age' => 'integer|between:18,75'
+            'nickname' => 'required',
+            'password' => 'required'
         ]);
         $user = User::findOrFail($id);
-        $user->update($request->all());
-        return new UserResource($user);
+        $user->update($request->except($except));
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return new UserResources($user);
+
     }
 
     /**

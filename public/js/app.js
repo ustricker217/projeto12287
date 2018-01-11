@@ -47331,7 +47331,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47340,6 +47340,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /* 68 */
 /***/ (function(module, exports) {
 
+//
 //
 //
 //
@@ -47388,6 +47389,10 @@ module.exports = {
                 _this.successMessage = error.data.msg;
                 console.log(_this.password);
             });
+        },
+
+        goToRegister: function goToRegister() {
+            this.$router.push('/register');
         }
     }
 };
@@ -47401,6 +47406,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "wrapper form-signin" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn-primary",
+        attrs: { type: "btn btn-default" },
+        on: {
+          click: function($event) {
+            _vm.goToRegister()
+          }
+        }
+      },
+      [_vm._v("Register")]
+    ),
+    _vm._v(" "),
     _c("h2", { staticClass: "form-signin-heading" }, [_vm._v("Please login")]),
     _vm._v(" "),
     _c("input", {
@@ -47657,9 +47676,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.currentUser = user;
             this.showSuccess = false;
         },
-        savedUser: function savedUser() {
-            this.currentUser = null;
-            this.$refs.usersListRef.editingUser = null;
+        savedUser: function savedUser(user) {
+            this.currentUser = user;
+            //this.$refs.usersListRef.editingUser = null;
             this.showSuccess = true;
             this.successMessage = 'User Saved';
             this.ifEditing = false;
@@ -47815,7 +47834,7 @@ module.exports = {
             var _this = this;
 
             axios.put('api/users/' + this.currentUser.id, this.currentUser).then(function (response) {
-                Object.assign(_this.currentUser, response.data.data);
+                //Object.assign(this.currentUser, response.data.data);
                 _this.$emit('user-saved', _this.currentUser);
             });
         },
@@ -48226,7 +48245,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48284,17 +48303,16 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
-//
 
 module.exports = {
     //props: ['users'],
     data: function data() {
         return {
-            username: '',
-            nickname: '',
-            mail: '',
-            password: '',
-            confirm_password: '',
+            username: null,
+            nickname: null,
+            mail: null,
+            password: null,
+            confirm_password: null,
             showSuccess: false,
             successMessage: ''
         };
@@ -48303,25 +48321,35 @@ module.exports = {
         registerUser: function registerUser() {
             var _this = this;
 
-            axios.post('api/register', {
-                'name': this.name,
-                'nicknname': this.nickname,
-                'email': this.username,
-                'password': this.password,
-                'confirm_password': this.confirm_password,
+            if (this.username == null || this.nickname == null || this.mail == null) {
+                this.showSuccess = true;
+                this.successMessage = "All feilds are required";
+            } else if (this.password != this.confirm_password) {
 
-                contentType: 'application/json'
-            }).then(function (response) {
-                _this.showSuccess = true;
-                _this.successMessage = response.data.msg;
-                _this.$emit('user-logged', false);
-                //this.$route.router.go('/multimemory');
-                _this.$router.push('/');
-            }).catch(function (error) {
-                _this.showSuccess = true;
-                _this.successMessage = error.data.msg;
-                console.log(_this.password);
-            });
+                this.showSuccess = true;
+                this.successMessage = "Password and Confirm Password are different";
+            } else {
+                axios.post('api/register', {
+                    'name': this.username,
+                    'nickname': this.nickname,
+                    'email': this.mail,
+                    'password': this.password,
+                    //'confirm_password': this.confirm_password,
+
+                    contentType: 'application/json'
+                }).then(function (response) {
+                    _this.showSuccess = true;
+                    _this.successMessage = response.data.msg;
+                    //this.$emit('user-logged', false);
+                    //this.$route.router.go('/multimemory');
+                    _this.$router.push('/');
+                }).catch(function (error) {
+                    //error.data.msg = "All fields are required";
+                    //this.showSuccess = true;
+                    //this.successMessage = error.data.msg;
+                    console.log(_this.password);
+                });
+            }
         }
     }
 };
@@ -48345,8 +48373,8 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.name,
-            expression: "name"
+            value: _vm.username,
+            expression: "username"
           }
         ],
         staticClass: "form-control",
@@ -48354,15 +48382,16 @@ var render = function() {
           type: "text",
           name: "name",
           id: "inputName",
-          placeholder: "Fullname"
+          placeholder: "Fullname",
+          required: ""
         },
-        domProps: { value: _vm.name },
+        domProps: { value: _vm.username },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.name = $event.target.value
+            _vm.username = $event.target.value
           }
         }
       })
@@ -48376,8 +48405,8 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.email,
-            expression: "email"
+            value: _vm.mail,
+            expression: "mail"
           }
         ],
         staticClass: "form-control",
@@ -48385,15 +48414,16 @@ var render = function() {
           type: "email",
           name: "email",
           id: "inputEmail",
-          placeholder: "Email address"
+          placeholder: "Email address",
+          required: ""
         },
-        domProps: { value: _vm.email },
+        domProps: { value: _vm.mail },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.email = $event.target.value
+            _vm.mail = $event.target.value
           }
         }
       })
@@ -48416,7 +48446,8 @@ var render = function() {
           type: "text",
           name: "nickname",
           id: "inputNickname",
-          placeholder: "Your Nickname"
+          placeholder: "Your Nickname",
+          required: ""
         },
         domProps: { value: _vm.nickname },
         on: {
@@ -48445,9 +48476,10 @@ var render = function() {
         staticClass: "form-control",
         attrs: {
           type: "password",
-          name: "age",
+          name: "password",
           id: "inputPassword",
-          placeholder: "Password"
+          placeholder: "Password",
+          required: ""
         },
         domProps: { value: _vm.password },
         on: {
@@ -48478,9 +48510,10 @@ var render = function() {
         staticClass: "form-control",
         attrs: {
           type: "password",
-          name: "age",
+          name: "confirm_password",
           id: "inputConfirmPassword",
-          placeholder: "Confirm Password"
+          placeholder: "Confirm Password",
+          required: ""
         },
         domProps: { value: _vm.confirm_password },
         on: {

@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //ADMIN API ROUTES
 Route::apiResource('users', 'UserControllerAPI');
 Route::apiResource('images', 'ImageControllerAPI');
+Route::put('users/{id}', 'UserControllerAPI@update');
 
 Route::put('users/{id}/changePermission', 'UserControllerAPI@blockUser');
 Route::put('images/{id}/changeStatus', 'ImageControllerAPI@changeStatus');

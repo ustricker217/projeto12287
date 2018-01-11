@@ -51,9 +51,9 @@
                 this.currentUser = user;
                 this.showSuccess = false;
             },
-            savedUser: function () {
-                this.currentUser = null;
-                this.$refs.usersListRef.editingUser = null;
+            savedUser: function (user) {
+                this.currentUser = user;
+                //this.$refs.usersListRef.editingUser = null;
                 this.showSuccess = true;
                 this.successMessage = 'User Saved';
                 this.ifEditing = false;
@@ -71,6 +71,7 @@
                 this.userToken = array[1];
                 sessionStorage.setItem('token-user', array[1]);
                 sessionStorage.setItem('username', array[0]);
+
 
                 axios.get('api/getLoggedUser/' + this.username)
                     .then(response => {
