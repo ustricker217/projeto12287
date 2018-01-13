@@ -15,11 +15,14 @@ class MemoryGame {
         this.flippedTiles = [];
         this.playerMoves = 0;
         this.timer = null;
+        this.points = {};
     }
 
     join(player2Name) {
         this.player2 = player2Name;
         this.gameStarted = true;
+        this.points[this.player1] = 0;
+        this.points[this.player2] = 0;
     }
 
     checkTilesEqual() {
@@ -31,6 +34,7 @@ class MemoryGame {
             this.playerMoves = 0;
             this.flippedTiles = [];
 
+            return true;
         } else {
             this.flippedTiles[0].flip();
             this.flippedTiles[1].flip();
@@ -41,6 +45,8 @@ class MemoryGame {
 
             this.playerMoves = 0;
             this.flippedTiles = [];
+
+            return false;
         }
     };
 
@@ -92,10 +98,33 @@ class MemoryGame {
         this.flippedTiles.push(this.boardGame.board[index]);
 
         if (this.playerMoves == 2) {
-            this.checkTilesEqual();
+
+            /*
+            this.timer = setTimeout(() => {
+                this.clearTimer();
+                this.checkTilesEqual();
+            }, 500);
+            */
+
+            if (this.checkTilesEqual() === true) {
+                if (this.playerTurn == 1) {
+                    this.points[this.player1]++;
+                }
+                else {
+                    this.points[this.player2]++;
+                }
+            }
             this.playerMoves = 0;
             if (!this.checkGameEnded()) {
                 this.playerTurn = this.playerTurn == 1 ? 2 : 1;
+            } else {
+                if (this.points[this.player1] > this.points[this.player2]) {
+                    this.winner = 1;
+                    return true;
+                } else {
+                    this.winner = 2;
+                    return true;
+                }
             }
             return true;
         }

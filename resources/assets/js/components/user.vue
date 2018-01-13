@@ -19,6 +19,14 @@
                 <user-edit :currentUser="currentUser" @user-canceled="cancelEdit" @user-saved="savedUser"></user-edit>
             </div>
 
+            <div v-if="playSingle && ifLogged">
+                <single-player :currentUser="currentUser"></single-player>
+            </div>
+
+            <div v-if="playMulti && ifLogged">
+                <multi-player :currentUser="currentUser.name" :userId="currentUser.id"></multi-player>
+            </div>
+
             <router-view></router-view>
         </div>
         <div class="alert alert-success" v-if="showSuccess">
@@ -32,6 +40,9 @@
 <script type="text/javascript">
     import UserLogin from './userLogin.vue';
     import UserEdit from './userEdit.vue';
+    import SinglePlayer from './singleplayer_memory.vue';
+    import MultiPlayer from './multiplayer_memory.vue';
+
 
     export default {
         data: function () {
@@ -44,6 +55,8 @@
                 userToken: null,
                 ifLogged: false,
                 ifEditing: false,
+                playSingle: false,
+                playMulti: false,
             }
         },
         methods: {
@@ -65,7 +78,7 @@
             },
 
             getLoggedUser: function (array) {
-                console.log(array);
+                //console.log(array);
                 this.ifLogged = true;
                 this.username = array[0];
                 this.userToken = array[1];
@@ -85,24 +98,44 @@
             },
 
             logout: function () {
-
+                //NAO FOI POSSIVEL FAZER AXIOS.POST PARA LOGOUT (DA SEMPRE ERRO)
+                sessionStorage.clear();
+                this.ifLogged = false;
+                this.currentUser = null;
+                this.username = null;
+                this.userToken = null;
             },
 
             goToSinglePlayer: function () {
-                this.$router.push('/singleplayer');
+                //this.$router.push('/singleplayer');
+                this.playSingle = true;
+                this.ifEditing = false;
             },
 
             goToMultiplayer: function () {
-                this.$router.push('/multiplayer');
+                //this.$router.push('/multiplayer');
+                this.playSingle = false;
+                this.ifEditing = false;
+                this.playMulti = true;
             },
 
-            getAuthUser: function () {
+            fillSession: function () {
                 this.username = sessionStorage.getItem('username');
                 this.userToken = sessionStorage.getItem('token-user');
 
                 if (this.username == null && this.userToken == null) {
                     this.ifLogged = false;
                 } else {
+                    axios.get('api/getLoggedUser/' + this.username)
+                        .then(response => {
+                            //console.log(response.data.data);
+                            this.currentUser = response.data.data;
+                            console.log(this.currentUser);
+                        })
+                        .catch(errors => {
+
+                        });
+
                     this.ifLogged = true;
                 }
             },
@@ -114,11 +147,14 @@
 
         },
         components: {
+            SinglePlayer,
             'user-login': UserLogin,
-            'user-edit': UserEdit
+            'user-edit': UserEdit,
+            'single-player': SinglePlayer,
+            'multi-player': MultiPlayer,
         },
         mounted() {
-            this.getAuthUser();
+            this.fillSession();
         }
 
     }

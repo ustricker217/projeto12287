@@ -30,7 +30,23 @@ class GameControllerAPI extends Controller
         return new GameResource(Game::find($id));
     }
 
-    public function store(Request $request)
+    public function storeSingle(Request $request)
+    {
+        $request->validate([
+            'player1' => 'required',
+        ]);
+        $game = new Game();
+        $game->fill($request->all());
+        // No matter what status and winner was defined on the client.
+        // When creating a game it will always assume "pending" status
+        // and winner will be null
+        $game->status = 'active';
+        $game->winner = null;
+        $game->save();
+        return response()->json(new GameResource($game), 201);
+    }
+
+    public function storeMulti(Request $request)
     {
         $request->validate([
             'player1' => 'required',

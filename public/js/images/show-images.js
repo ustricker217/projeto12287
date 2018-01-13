@@ -28,9 +28,28 @@
         });
     };
 
+    window.storeImg = function () {
+        event.preventDefault();
+
+        $.ajax({
+            url: '/api/images',
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            success: function () {
+                $datatable.ajax.reload();
+                console.log(this.data);
+            }
+        });
+    };
+
 
     var changeStatus = function (imageId, estado) {
         return '<a class="btn btn-xs btn-info"  href="/images/' + imageId + '" onclick=" blockUnblock(' + imageId + ', ' + estado + ')">' + (estado == 1 ? "Deactivate" : "Activate") + '</a>';
+
+    };
+
+    var storeButton = function () {
+        return '<a class="btn btn-xs btn-info" type="file"  onclick=" storeImg()">' + "Upload" + '</a>';
 
     };
 
@@ -68,7 +87,8 @@
                 },
                 columns: [
                     {"data": "face"},
-                    {"data": "path",
+                    {
+                        "data": "path",
                         "render": function (data, type, row, meta) {
                             return '<img height="75%" width="15%" src="img/' + data + '"/>';
                         }
@@ -94,4 +114,5 @@
     };
 
     getImages();
+    storeButton();
 })();

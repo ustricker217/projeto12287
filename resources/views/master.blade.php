@@ -53,11 +53,9 @@
                 <li>
                     <a href="{{route('user.index')}}"> Dashboard</a>
                 </li>
-                    <li><a href="#">Login</a></li>
-
-                    <li><a href="{{route('admin.changePasswd')}}">Alterar Password Admin</a></li>
-                    <li><a href="{{route('admin.updateConfigMail')}}">Alterar Mail Config</a></li>
-                    <li><a href="{{route('image.index')}}">Repositório Peças</a></li>
+                <li><a href="{{route('admin.changePasswd')}}">Alterar Password Admin</a></li>
+                <li><a href="{{route('admin.updateConfigMail')}}">Alterar Mail Config</a></li>
+                <li><a href="{{route('image.index')}}">Repositório Peças</a></li>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

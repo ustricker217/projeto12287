@@ -9,7 +9,8 @@ class Game extends Model
     protected $fillable = [
         'status',
         'type',
-        'toral_players',
+        'total_players',
         'winner',
+        'created_by',
     ];
 }

@@ -40,4 +40,22 @@ class ImageControllerAPI extends Controller
         $image->delete();
         return response()->json(null, 204);
     }
+
+    public function store(Request $request)
+    {
+        $image = new Image();
+        $image->face = 'tile';
+        $image->active = 0;
+
+        $ext = $request->file->guessClientExtension();
+        $filename = str_random(5);
+        $path = $filename . '.' . "{$ext}";
+
+        $image->path = $path;
+        $image->save();
+
+        $request->file('file')->move(public_path('/img'), $filename);
+
+        return response()->json(null, 200);
+    }
 }

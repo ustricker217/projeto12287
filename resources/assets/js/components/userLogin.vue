@@ -43,9 +43,9 @@
                         this.$router.push('/');
                     })
                     .catch(error => {
+                        //console.log(error);
                         this.showSuccess = true;
-                        this.successMessage = error.data.msg;
-                        console.log(this.password);
+                        this.successMessage = 'Credenciais Inválidas';
                     });
             },
 

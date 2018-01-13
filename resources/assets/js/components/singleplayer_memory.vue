@@ -27,6 +27,7 @@
 
 <script type="text/javascript">
     export default {
+        props: ['currentUser'],
         data: function () {
             return {
                 title: 'Memory Game',
@@ -92,6 +93,8 @@
             startGame: function () {
                 this.start = true;
                 this.hidebtn = false;
+
+                this.saveNewGame();
             },
 
             checkTilesEqual: function () {
@@ -103,8 +106,8 @@
                     this.flippedTiles = [];
 
                 } else {
-                        this.flippedTiles[0].flip();
-                        this.flippedTiles[1].flip();
+                    this.flippedTiles[0].flip();
+                    this.flippedTiles[1].flip();
 
 
                     //this.successMessage = "Not a pair";
@@ -152,7 +155,22 @@
             // ----------------------------------------------------------------------------------------
             playerName: function (playerNumber) {
 
-            }
+            },
+
+            saveNewGame: function () {
+                axios.post('api/createSingle', {
+                    //ROTA QUANDO PROTEGIDA, PASSPORT DA ERRO NO POST
+                   /* headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('token-user'),
+                        'Content-Type': 'application/json',
+                    },
+                    */
+                    'type': 'singleplayer',
+                    'player1': this.currentUser.name,
+                    'created_by': this.currentUser.id,
+                    'total_players': 1,
+                })
+            },
         },
         computed: {},
         mounted() {
@@ -193,7 +211,7 @@
             for (let i = 0; i < 500; i++) {
                 let posOne = Math.floor(Math.random() * length);
                 let posTwo = Math.floor(Math.random() * length);
-                let aux = board[posOne] ;
+                let aux = board[posOne];
                 board[posOne] = board[posTwo];
                 board[posTwo] = aux;
 

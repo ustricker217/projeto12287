@@ -16,11 +16,11 @@ class Game extends Resource
     {
         return [
             'id' => $this->id,
+            'type' => $this->type,
             'status' => $this->status,
-            'player1' => $this->player1,
-            'player2' => $this->player2,
+            'total_players' => $this->total_players,
+            'created_by' => $this->created_by,
             'winner' => $this->winner,
-            'winnerName' => $this->getWinnerName(),
         ];
         return parent::toArray($request);
     }

@@ -77,7 +77,8 @@ class UserControllerAPI extends Controller
                 $user->save();
             }
         }
-        return new UserResources($user);
+        //return new UserResources($user);
+        return view('vue.index');
     }
 
     /**

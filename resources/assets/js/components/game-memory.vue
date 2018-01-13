@@ -8,6 +8,7 @@
             <div class="alert" :class="alerttype">
                 <strong>{{ message }} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="game.gameEnded" v-on:click.prevent="closeGame">Close Game</a></strong>
             </div>
+
             <div class="board">
                 <div v-for="(piece, index) of game.boardGame.board">
                     <img v-bind:src="pieceImageURL(index)" v-on:click="clickPiece(index)">
@@ -20,7 +21,7 @@
 
 <script type="text/javascript">
     export default {
-        props: ['game'],
+        props: ['game', 'currentUser'],
         data: function () {
             return {}
         },
